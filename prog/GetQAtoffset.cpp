@@ -1,3 +1,10 @@
+/**
+* Takes text files T0offset.txt from each run folder and makes graph t0offset vs runnumber.
+* Puts graphs for different centralities to single .root file - QAt0offset.root
+*
+* S. Vdovkina svvdovkina@gmail.com
+**/
+
 #define NMUL 14
 void GetQAtoffset()
 {
