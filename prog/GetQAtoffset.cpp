@@ -46,11 +46,13 @@ void GetQAtoffset()
 	// make graph of t0 vs runnum for all the centralities and write them to the root file
 	TFile *outfile = new TFile("QAt0offset.root","recreate");
 	TGraph *gr[NMUL];
+	char name[20];
 				
 	for (int ic = 0; ic < NMUL; ic++)
 	{
 		gr[ic] = new TGraphErrors(Nrun, run, t0[ic], 0, t0sig[ic]); 
-		gr[ic]->Write();
+		sprintf(name, "Graph_cent%i", ic);
+		gr[ic]->Write(name);
 	}
 	outfile->Close();
 }
