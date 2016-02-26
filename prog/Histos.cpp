@@ -5,6 +5,7 @@
 
 #include "TFile.h"
 #include "TF1.h"
+#include "TMath.h"
 
 void Histos::BookHist()
 {
@@ -105,10 +106,14 @@ void Histos::WriteHist(int run)
 			for (int id = 0; id < NDET; id++)
 			{
 				Double_t mCos = hcosNphi[ih][id][ic]->GetMean();
-				Double_t sigCos = hcosNphi[ih][id][ic]->GetRMS(); 
+				Double_t sigCos = hcosNphi[ih][id][ic]->GetRMS();
+				Double_t int1 = hcosNphi[ih][id][ic]->Integral();
+				if (int1 == 0.) {int1=1.;} // avoiding devision by zero
 				Double_t mSin = hsinNphi[ih][id][ic]->GetMean();
 				Double_t sigSin = hsinNphi[ih][id][ic]->GetRMS(); 
-				fout<<run<<" "<<ic<<" "<<ih<<" "<<id<<" "<<mCos<<" "<<sigCos<<" "<<mSin<<" "<<sigSin<<std::endl;
+				Double_t int2 = hsinNphi[ih][id][ic]->Integral();
+				if (int2 == 0.) {int1=2.;} // avoiding devision by zero
+				fout<<run<<" "<<ic<<" "<<ih<<" "<<id<<" "<<mCos<<" "<<sigCos/TMath::Sqrt(int1)<<" "<<mSin<<" "<<sigSin/TMath::Sqrt(int2)<<std::endl;
 			}
 		}
 	}
