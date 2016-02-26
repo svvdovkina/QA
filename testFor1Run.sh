@@ -1,6 +1,6 @@
 #!/bin/bash
 cd ./prog
-rm -f Hisots_cpp.so TreeVar_cpp.so Qvectors_cpp.so Event_cpp.so
+rm -f Histos_cpp.so TreeVar_cpp.so Qvectors_cpp.so Event_cpp.so
 root.exe -b -l <<EOF1
 .L Histos.cpp+
 .L TreeVar.cpp+
